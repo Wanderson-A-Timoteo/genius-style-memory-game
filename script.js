@@ -47,12 +47,12 @@ let checkOrder = () => {
     for (let i in clickedOrder) {
         if (clickedOrder[i] != order[i]) {
             // Função perdeu
-            lose()
+            gameOver()
             break
         }
     }
     if (clickedOrder.length == order.length) {
-        alert(`Pontuação: ${score}\n Você acertou! Iniciando próximo nível.`)
+        alert(`Pontuação: ${score}\nVocê acertou! Iniciando próximo nível.`)
         // Função próximo nível
         nextLevel()
     }
@@ -60,11 +60,41 @@ let checkOrder = () => {
 
 // Funçao para clique do usuario
 let click = color => {
-    clickedOrder[clickedorder.length] = color
+    clickedOrder[clickedOrder.length] = color
     createColorElement(color).classList.add('selected')
     setTimeout(() => {
         createColorElement(color).classList.remove('selected')
     })
 
     checkOrder()
+}
+
+// Função que retorna a cor
+let createColorElement = color => {
+    if (color == 0) {
+        return verde
+    } else if (color == 1) {
+        return vermelho
+    } else if (color == 2) {
+        return amarelo
+    } else if (color == 3) {
+        return azul
+    }
+}
+
+// Função para o próximo nível do jogo
+let nextLevel = () => {
+    score++
+    shuffleOrder()
+}
+
+// Função para Game Over
+let gameOver = () => {
+    alert(
+        `Pontuação: ${score}!\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`
+    )
+    order = []
+    clickedOrder = []
+
+    playGame()
 }
