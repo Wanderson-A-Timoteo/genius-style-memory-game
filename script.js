@@ -8,11 +8,8 @@ let score = 0
 // 3 - azul
 
 const azul = document.querySelector('.azul')
-
 const vermelho = document.querySelector('.vermelho')
-
 const verde = document.querySelector('.verde')
-
 const amarelo = document.querySelector('.amarelo')
 
 // Função para sortear os números entre 0 e 3.
@@ -64,9 +61,9 @@ let click = color => {
     createColorElement(color).classList.add('selected')
     setTimeout(() => {
         createColorElement(color).classList.remove('selected')
-    })
 
-    checkOrder()
+        checkOrder()
+    }, 250)
 }
 
 // Função que retorna a cor
@@ -98,3 +95,20 @@ let gameOver = () => {
 
     playGame()
 }
+
+// Função para iniciar novo jogo
+let playGame = () => {
+    alert('Bem vindo ao Gênesis! Iniciando novo jogo!')
+    score = 0
+
+    nextLevel()
+}
+
+// Eventos de clique para as cores
+verde.onclick = () => click(0)
+vermelho.onclick = () => click(1)
+amarelo.onclick = () => click(2)
+azul.onclick = () => click(3)
+
+// Inicio do jogo
+playGame()
