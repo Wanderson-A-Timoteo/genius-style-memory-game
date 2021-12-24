@@ -32,12 +32,39 @@ let shuffleOrder = () => {
 // Acende a cor
 let lightColor = (element, number) => {
     number = number * 500
-    // Acende a cor
+    // Acende o botão
     setTimeout(() => {
         element.classList.add('selected')
     }, number - 250)
-    // Apaga a cor
+    // Apaga o botão
     setTimeout(() => {
         element.classList.remove('selected')
     })
+}
+
+// Verifica se os botões clicados são os mesmos da ordem gerada no jogo
+let checkOrder = () => {
+    for (let i in clickedOrder) {
+        if (clickedOrder[i] != order[i]) {
+            // Função perdeu
+            lose()
+            break
+        }
+    }
+    if (clickedOrder.length == order.length) {
+        alert(`Pontuação: ${score}\n Você acertou! Iniciando próximo nível.`)
+        // Função próximo nível
+        nextLevel()
+    }
+}
+
+// Funçao para clique do usuario
+let click = color => {
+    clickedOrder[clickedorder.length] = color
+    createColorElement(color).classList.add('selected')
+    setTimeout(() => {
+        createColorElement(color).classList.remove('selected')
+    })
+
+    checkOrder()
 }
